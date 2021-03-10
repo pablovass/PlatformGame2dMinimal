@@ -1,7 +1,8 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
+using System.Net;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
@@ -9,6 +10,11 @@ public class Player : MonoBehaviour
     [SerializeField]  float speedJump=300f;
     [SerializeField]  Rigidbody2D playerRb;
     bool isGrounded = true;
+    [SerializeField]  Animator anim;
+    private Vector3 moveDirection;
+    float h;
+    
+    
     
      // Start is called before the first frame update
     void Start()
@@ -19,19 +25,35 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-    //move the character from left to right with speed
-    playerRb.velocity = new Vector2(Input.GetAxis("Horizontal") * speed, playerRb.velocity.y);
-    //condicional jump
-    if (isGrounded)
-    {
-        if (Input.GetKeyDown(KeyCode.Space)) 
+        h = Input.GetAxis("Horizontal");
+        moveDirection.x = h;
+
+        //move the character from left to right with speed
+        playerRb.velocity = new Vector2(Input.GetAxis("Horizontal") * speed, playerRb.velocity.y);
+        // new stile move
+        transform.position += moveDirection * Time.deltaTime * speed;
+
+        if (Input.GetAxis("Horizontal")<0)
         {
-            playerRb.AddForce(Vector2.up*speedJump);
-            isGrounded = false;
+            GetComponent<SpriteRenderer>().flipX = true;
+        }else if (Input.GetAxis("Horizontal") > 0)
+        {
+            GetComponent<SpriteRenderer>().flipX = false;
         }
-    
-    }
-    
+
+        //condicional jump
+        if (isGrounded)
+        {
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                playerRb.AddForce(Vector2.up * speedJump);
+                isGrounded = false;
+                anim.SetTrigger("Jump");
+            }
+
+        }
+
+        anim.SetFloat("Speed", moveDirection.magnitude);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
