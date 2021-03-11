@@ -1,57 +1,56 @@
-﻿using System;
+﻿
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour
+public class EnemyBehaviour : MonoBehaviour
 {
-    
     Rigidbody2D enemyRb;
+    SpriteRenderer enemySpriteRend;
+    Animator enemyAnim;
+    ParticleSystem enemyPart;
+    AudioSource enemyAudio;
 
-    private float timeBeforeChange;
+    float timeBeforeChange;
+    public float delay = .5f;
+    public float speed = .3f;
 
-    [SerializeField]  float delay = .5f;
-    [SerializeField]  float speed = .3f;
-    private SpriteRenderer enemySpriteRenderer;
-
-    private Animator enemyAnim;
-    // Start is called before the first frame update
-    void Start()
+    void Start ()
     {
         enemyRb = GetComponent<Rigidbody2D>();
-        enemySpriteRenderer = GetComponent<SpriteRenderer>();
-
+        enemySpriteRend = GetComponent<SpriteRenderer>();
+        enemyAnim = GetComponent<Animator>();
+        enemyPart = GameObject.Find("EnemyParticle").GetComponent<ParticleSystem>();
+        enemyAudio = GetComponent<AudioSource>();
     }
-
+	
     // Update is called once per frame
-    void Update()
+    void Update ()
     {
-        //se voltea
-        if (speed>0)
-        {
-            enemySpriteRenderer.flipX = false;
-        }
-        else if(speed<0)
-        {
-            enemySpriteRenderer.flipX = true;
-        }
-        //MOVE ENEMY
         enemyRb.velocity = Vector2.right * speed;
-        //CADA 5 SEGUNDO CAMINA DE UN LADO AL OTRO
+
+        if (speed > 0)
+            enemySpriteRend.flipX = false;
+        else if (speed < 0)
+            enemySpriteRend.flipX = true;
+
         if (timeBeforeChange < Time.time)
         {
             speed *= -1;
             timeBeforeChange = Time.time + delay;
-        }    
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Player"))
+        if(collision.gameObject.tag == "Player")
         {
-            if (transform.position.y +.03f < collision.transform.position.y)
+            if(transform.position.y + .03f < collision.transform.position.y)
             {
-                enemyAnim.SetBool("isDead",true);
+                enemyPart.transform.position = transform.position;
+                enemyPart.Play();
+                enemyAudio.Play();
+                enemyAnim.SetBool("isDead", true);
             }
         }
     }
@@ -59,6 +58,5 @@ public class Enemy : MonoBehaviour
     public void DisableEnemy()
     {
         gameObject.SetActive(false);
-        //Destroy(gameObject);
     }
 }
