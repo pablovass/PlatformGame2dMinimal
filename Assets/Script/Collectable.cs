@@ -8,14 +8,14 @@ public class Collectable : MonoBehaviour {
 	public static int collectableQuantity = 0; // la separamos de todos los objetos y hacemos que sean distinta para todos 
     [SerializeField]Text collectableText;
 
-    ParticleSystem collectablePart;
+    //ParticleSystem collectablePart;
     AudioSource collectableAudio;
 
 	// Use this for initialization
 	void Start () {
         collectableQuantity = 0;
         collectableText = GameObject.Find("CollectableQuantityText").GetComponent<Text>();
-        collectablePart = GameObject.Find("CollectableParticle").GetComponent<ParticleSystem>();
+       // collectablePart = GameObject.Find("CollectableParticle").GetComponent<ParticleSystem>();
         collectableAudio = GetComponentInParent<AudioSource>();
     }
 	
