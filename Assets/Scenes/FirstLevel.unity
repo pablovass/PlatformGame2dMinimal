@@ -805,7 +805,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.3576584, y: 0.9234009, z: -10}
+  m_LocalPosition: {x: -0.36922216, y: 0.9236767, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1292,14 +1292,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1309142121}
+  - component: {fileID: 1309142124}
   - component: {fileID: 1309142120}
   - component: {fileID: 1309142119}
   - component: {fileID: 1309142123}
   - component: {fileID: 1309142122}
-  - component: {fileID: 1309142124}
   m_Layer: 0
   m_Name: Enemy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1436,12 +1436,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9de66fffd3829fb4fb60292a2d6cd468, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyRb: {fileID: 0}
-  timeBeforeChange: 0
-  delay: 3
+  delay: 0.5
   speed: 2
-  enemySpriteRenderer: {fileID: 0}
-  enemyAnim: {fileID: 0}
 --- !u!1 &1335600147
 GameObject:
   m_ObjectHideFlags: 0

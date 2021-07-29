@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyBehaviour : MonoBehaviour
+public class Enemy : MonoBehaviour
 {
     Rigidbody2D enemyRb;
     SpriteRenderer enemySpriteRend;
@@ -12,16 +12,16 @@ public class EnemyBehaviour : MonoBehaviour
     AudioSource enemyAudio;
 
     float timeBeforeChange;
-    public float delay = .5f;
-    public float speed = .3f;
+    [SerializeField] float delay = 0.5f;
+    [SerializeField] float speed = 2f;
 
     void Start ()
     {
         enemyRb = GetComponent<Rigidbody2D>();
         enemySpriteRend = GetComponent<SpriteRenderer>();
         enemyAnim = GetComponent<Animator>();
-        enemyPart = GameObject.Find("EnemyParticle").GetComponent<ParticleSystem>();
-        enemyAudio = GetComponent<AudioSource>();
+       // enemyPart = GameObject.Find("EnemyParticle").GetComponent<ParticleSystem>();
+        //enemyAudio = GetComponent<AudioSource>();
     }
 	
     // Update is called once per frame
@@ -45,11 +45,11 @@ public class EnemyBehaviour : MonoBehaviour
     {
         if(collision.gameObject.tag == "Player")
         {
-            if(transform.position.y + .03f < collision.transform.position.y)
+            if((transform.position.y + -2.46f) < collision.transform.position.y)
             {
-                enemyPart.transform.position = transform.position;
-                enemyPart.Play();
-                enemyAudio.Play();
+               // enemyPart.transform.position = transform.position;
+               // enemyPart.Play();
+                //enemyAudio.Play();
                 enemyAnim.SetBool("isDead", true);
             }
         }
