@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class Collectable : MonoBehaviour {
 
-    public static int collectableQuantity = 0;
+	public static int collectableQuantity = 0; // la separamos de todos los objetos y hacemos que sean distinta para todos 
     [SerializeField]Text collectableText;
 
     ParticleSystem collectablePart;
@@ -28,9 +28,9 @@ public class Collectable : MonoBehaviour {
     {
         if(col.tag == "Player")
         {
-            collectablePart.transform.position = transform.position;
-            collectablePart.Play();
-            collectableAudio.Play();
+            //collectablePart.transform.position = transform.position;
+            //collectablePart.Play();
+           // collectableAudio.Play();
             gameObject.SetActive(false);
             collectableQuantity++;
             collectableText.text = collectableQuantity.ToString();
