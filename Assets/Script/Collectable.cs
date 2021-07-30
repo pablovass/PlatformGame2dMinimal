@@ -14,7 +14,7 @@ public class Collectable : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         collectableQuantity = 0;
-        collectableText = GameObject.Find("CollectableQuantityText").GetComponent<Text>();
+        //collectableText = GameObject.Find("CollectableQuantityText").GetComponent<Text>();
        // collectablePart = GameObject.Find("CollectableParticle").GetComponent<ParticleSystem>();
         collectableAudio = GetComponentInParent<AudioSource>();
     }
